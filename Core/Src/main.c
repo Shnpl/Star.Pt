@@ -19,7 +19,9 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "usart.h"
 #include "gpio.h"
+#include "fmc.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -43,7 +45,6 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -85,17 +86,39 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_FMC_Init();
+  MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
+  
+  HAL_UART_Transmit(&huart1,(uint8_t*)"Star.Pt",8,0xFF);
+  
+  test[0] = 114;
+  uint16_t i = 0;
+  for(i = 1;i<25000;i++)
+  {
+	  test[i]=i;
+  }
 
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  
+  HAL_UART_Transmit(&huart1,(uint8_t*)test,1,0xFF);
+  uint32_t *p = test;
   while (1)
   {
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+	  
+	  
+	  uint8_t print_text[8] = {0};
+	  sprintf((char*)print_text,"%d",(int)*p);
+	  
+	  HAL_UART_Transmit(&huart1,print_text,8,1000);
+	  p++;
+	  HAL_Delay(500);
   }
   /* USER CODE END 3 */
 }
