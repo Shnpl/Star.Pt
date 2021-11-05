@@ -16,9 +16,14 @@
   *
   ******************************************************************************
   */
+/*----------ATTENTION-----------
+@ Use MicroLib!S
+------------------------------*/
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "dcmi.h"
+#include "dma.h"
 #include "tim.h"
 #include "usart.h"
 #include "gpio.h"
@@ -27,6 +32,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "usmart.h"
+#include "camera.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -87,12 +93,17 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_DMA_Init();
   MX_FMC_Init();
   MX_USART1_UART_Init();
   MX_TIM16_Init();
+  MX_DCMI_Init();
   /* USER CODE BEGIN 2 */
-  usmart_dev.init(200);
+  //I2C->CAMERA->DCMI?
+  CAMERA_Init();
 
+  usmart_dev.init(200);
+  HAL_GPIO_WritePin(GPIOB,GPIO_PIN_0,GPIO_PIN_RESET);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -103,8 +114,8 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	  HAL_Delay(500);
-		HAL_GPIO_TogglePin(GPIOB,GPIO_PIN_0);
+	 HAL_Delay(500);
+	HAL_GPIO_TogglePin(GPIOB,GPIO_PIN_0);
   }
   /* USER CODE END 3 */
 }

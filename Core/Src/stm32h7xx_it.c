@@ -58,6 +58,8 @@
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/
+extern DMA_HandleTypeDef hdma_dcmi;
+extern DCMI_HandleTypeDef hdcmi;
 extern TIM_HandleTypeDef htim16;
 extern UART_HandleTypeDef huart1;
 /* USER CODE BEGIN EV */
@@ -203,17 +205,17 @@ void SysTick_Handler(void)
 /******************************************************************************/
 
 /**
-  * @brief This function handles PVD and AVD interrupts through EXTI line 16.
+  * @brief This function handles DMA1 stream0 global interrupt.
   */
-void PVD_AVD_IRQHandler(void)
+void DMA1_Stream0_IRQHandler(void)
 {
-  /* USER CODE BEGIN PVD_AVD_IRQn 0 */
+  /* USER CODE BEGIN DMA1_Stream0_IRQn 0 */
 
-  /* USER CODE END PVD_AVD_IRQn 0 */
-  HAL_PWREx_PVD_AVD_IRQHandler();
-  /* USER CODE BEGIN PVD_AVD_IRQn 1 */
+  /* USER CODE END DMA1_Stream0_IRQn 0 */
+  HAL_DMA_IRQHandler(&hdma_dcmi);
+  /* USER CODE BEGIN DMA1_Stream0_IRQn 1 */
 
-  /* USER CODE END PVD_AVD_IRQn 1 */
+  /* USER CODE END DMA1_Stream0_IRQn 1 */
 }
 
 /**
@@ -222,27 +224,39 @@ void PVD_AVD_IRQHandler(void)
 void USART1_IRQHandler(void)
 {
   /* USER CODE BEGIN USART1_IRQn 0 */
-	uint32_t timeout=0;
+  uint32_t timeout=0;
   uint32_t maxDelay=0x1FFFF;
-	
   /* USER CODE END USART1_IRQn 0 */
   HAL_UART_IRQHandler(&huart1);
   /* USER CODE BEGIN USART1_IRQn 1 */
-	
-	timeout=0;
-    while (HAL_UART_GetState(&huart1)!=HAL_UART_STATE_READY)//等待就绪
-	{
-        timeout++;////超时处理
-        if(timeout>maxDelay) break;		
-	}
-     
-	timeout=0;
-	while(HAL_UART_Receive_IT(&huart1,(uint8_t *)aRxBuffer, RXBUFFERSIZE)!=HAL_OK)//�?次处理完成之后，重新�?启中断并设置RxXferCount�?1
-	{
-        timeout++; //超时处理
-        if(timeout>maxDelay) break;	
-	}
+  timeout=0;
+  while (HAL_UART_GetState(&huart1)!=HAL_UART_STATE_READY)//ç­‰å¾�?�å°±ç»�?
+  {
+	timeout++;////è¶…æ�?�¶å¤�?�ç�??
+	if(timeout>maxDelay) break;		
+  }
+ 
+  timeout=0;
+  while(HAL_UART_Receive_IT(&huart1,(uint8_t *)aRxBuffer, RXBUFFERSIZE)!=HAL_OK)//ä¸?æ¬¡å¤„ç�?�å®Œæˆä¹�?�åŽï¼Œé�?�æ�?�°å�??å¯ä¸­æ–­å¹¶è®¾ç½®RxXferCountä¸?1
+  {
+	timeout++; //è¶…æ�?�¶å¤�?�ç�??
+	if(timeout>maxDelay) break;	
+  }
   /* USER CODE END USART1_IRQn 1 */
+}
+
+/**
+  * @brief This function handles DCMI global interrupt.
+  */
+void DCMI_IRQHandler(void)
+{
+  /* USER CODE BEGIN DCMI_IRQn 0 */
+
+  /* USER CODE END DCMI_IRQn 0 */
+  HAL_DCMI_IRQHandler(&hdcmi);
+  /* USER CODE BEGIN DCMI_IRQn 1 */
+
+  /* USER CODE END DCMI_IRQn 1 */
 }
 
 /**

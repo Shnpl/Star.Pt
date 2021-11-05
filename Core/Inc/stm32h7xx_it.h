@@ -56,8 +56,9 @@ void SVC_Handler(void);
 void DebugMon_Handler(void);
 void PendSV_Handler(void);
 void SysTick_Handler(void);
-void PVD_AVD_IRQHandler(void);
+void DMA1_Stream0_IRQHandler(void);
 void USART1_IRQHandler(void);
+void DCMI_IRQHandler(void);
 void TIM16_IRQHandler(void);
 /* USER CODE BEGIN EFP */
 

@@ -58,6 +58,14 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define DCMI_PWDN_Pin GPIO_PIN_11
+#define DCMI_PWDN_GPIO_Port GPIOG
+#define DCMI_RST_Pin GPIO_PIN_12
+#define DCMI_RST_GPIO_Port GPIOG
+#define SCCB_SCL_Pin GPIO_PIN_10
+#define SCCB_SCL_GPIO_Port GPIOB
+#define SCCB_SDA_Pin GPIO_PIN_11
+#define SCCB_SDA_GPIO_Port GPIOB
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */
