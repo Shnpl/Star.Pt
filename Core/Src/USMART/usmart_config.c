@@ -5,7 +5,37 @@
 
 #include "fmc.h"
 
-								 
+uint32_t test_a(uint32_t a,uint32_t b)
+{
+	return a+b;
+}		 
+uint8_t write_in(void)
+{
+	uint32_t i = 0;
+	for(i = 0;i< 250000;i++)
+	{
+		ext[i] = i;
+	}
+	return 0;
+}
+uint8_t read_out(void)
+{
+	uint32_t i = 0;
+	for(i = 0;i< 250000;i++)
+	{
+		printf("%d\r\n",i);
+		if(ext[i] != i)
+		{
+			return 1;
+		}
+	}
+	return 0;
+}
+uint32_t read_addr_ext(uint32_t addr)
+{
+	uint32_t *p = (uint32_t*)addr;
+	return *p;
+}
 //extern void led_set(uint8_t sta);
 //extern void test_fun(void(*ledset)(uint8_t),uint8_t sta);										  
 //函数名列表初始化(用户自己添加)
@@ -15,6 +45,10 @@ struct _m_usmart_nametab usmart_nametab[]=
 #if USMART_USE_WRFUNS==1 	//如果使能了读写操作
 	(void*)read_addr,"uint32_t read_addr(uint32_t addr)",
 	(void*)write_addr,"void write_addr(uint32_t addr,uint32_t val)",	 
+	(void*)test_a,"uint32_t test_a(uint32_t a,uint32_t b)",
+	(void*)write_in,"uint8_t write_in(void)",
+	(void*)read_out,"uint8_t read_out(void)",
+	(void*)read_addr_ext,"uint32_t read_addr_ext(uint32_t addr)"		
 #endif		   
 //	(void*)delay_ms,"void delay_ms(uint16_t nms)",
 // 	(void*)delay_us,"void delay_us(uint32_t nus)",	 
@@ -44,6 +78,8 @@ struct _m_usmart_nametab usmart_nametab[]=
 //	(void*)test_fun,"void test_fun(void(*ledset)(uint8_t),uint8_t sta)",				
 };						  
 ///////////////////////////////////END///////////////////////////////////////////////
+
+
 /////////////////////////////////////////////////////////////////////////////////////
 //函数控制管理器初始化
 //得到各个受控函数的名字

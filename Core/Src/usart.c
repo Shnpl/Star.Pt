@@ -21,6 +21,23 @@
 #include "usart.h"
 
 /* USER CODE BEGIN 0 */
+uint8_t USART_RX_BUF[USART_REC_LEN];     //Recieve buffer,max length : USART_REC_LEN.
+//Receive status
+//bit15�?	接收完成标志
+//bit14�?	接收�?0x0d
+//bit13~0�?	接收到的有效字节数目
+uint16_t USART_RX_STA=0;       //接收状�?�标�?	
+
+uint8_t aRxBuffer[RXBUFFERSIZE];//HAL库使用的串口接收缓冲
+
+//重定向fputc
+
+int fputc(int ch, FILE *f)
+{      
+	while((USART1->ISR&0X40)==0);//循环发�??,直到发�?�完�?   
+	USART1->TDR = (uint8_t) ch;      
+	return ch;
+}
 
 /* USER CODE END 0 */
 
@@ -66,7 +83,7 @@ void MX_USART1_UART_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN USART1_Init 2 */
-
+  HAL_UART_Receive_IT(&huart1,(uint8_t*)aRxBuffer,RXBUFFERSIZE);
   /* USER CODE END USART1_Init 2 */
 
 }
@@ -105,6 +122,9 @@ void HAL_UART_MspInit(UART_HandleTypeDef* uartHandle)
     GPIO_InitStruct.Alternate = GPIO_AF7_USART1;
     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
+    /* USART1 interrupt Init */
+    HAL_NVIC_SetPriority(USART1_IRQn, 3, 3);
+    HAL_NVIC_EnableIRQ(USART1_IRQn);
   /* USER CODE BEGIN USART1_MspInit 1 */
 
   /* USER CODE END USART1_MspInit 1 */
@@ -128,6 +148,8 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* uartHandle)
     */
     HAL_GPIO_DeInit(GPIOA, GPIO_PIN_10|GPIO_PIN_9);
 
+    /* USART1 interrupt Deinit */
+    HAL_NVIC_DisableIRQ(USART1_IRQn);
   /* USER CODE BEGIN USART1_MspDeInit 1 */
 
   /* USER CODE END USART1_MspDeInit 1 */
@@ -135,7 +157,31 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* uartHandle)
 }
 
 /* USER CODE BEGIN 1 */
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+	if(huart->Instance==USART1)//如果是串�?1
+	{
+		if((USART_RX_STA&0x8000)==0)//接收未完�?
+		{
+			if(USART_RX_STA&0x4000)//接收到了0x0d
+			{
+				if(aRxBuffer[0]!=0x0a)USART_RX_STA=0;//接收错误,重新�?�?
+				else USART_RX_STA|=0x8000;	//接收完成�? 
+			}
+			else //还没收到0X0D
+			{	
+				if(aRxBuffer[0]==0x0d)USART_RX_STA|=0x4000;
+				else
+				{
+					USART_RX_BUF[USART_RX_STA&0X3FFF]=aRxBuffer[0] ;
+					USART_RX_STA++;
+					if(USART_RX_STA>(USART_REC_LEN-1))USART_RX_STA=0;//接收数据错误,重新�?始接�?	  
+				}		 
+			}
+		}
 
+	}
+}
 /* USER CODE END 1 */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

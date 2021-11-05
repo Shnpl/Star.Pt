@@ -1,18 +1,18 @@
 #include "usmart.h"
 #include "tim.h"
 
-//#include "usart.h"
+#include "usart.h"
 
 //系统命令
 uint8_t *sys_cmd_tab[]=
 {
-	"?",
-	"help",
-	"list",
-	"id",
-	"hex",
-	"dec",
-	"runtime",	   
+	(uint8_t *)"?",
+	(uint8_t *)"help",
+	(uint8_t *)"list",
+	(uint8_t *)"id",
+	(uint8_t *)"hex",
+	(uint8_t *)"dec",
+	(uint8_t *)"runtime",	   
 };	    
 //处理系统指令
 //0,成功处理;其他,错误代码;
@@ -37,21 +37,20 @@ uint8_t usmart_sys_cmd_exe(uint8_t *str)
 			printf("\r\n");
 #if USMART_USE_HELP 
 			printf("------------------------USMART V3.3------------------------ \r\n");
-			printf("    USMART是由ALIENTEK开发的一个灵巧的串口调试互交组件,通过 \r\n");
-			printf("它,你可以通过串口助手调用程序里面的任何函数,并执行.因此,你可\r\n");
-			printf("以随意更改函数的输入参数(支持数字(10/16进制,支持负数)、字符串\r\n"),
-			printf("、函数入口地址等作为参数),单个函数最多支持10个输入参数,并支持\r\n"),  
-			printf("函数返回值显示.支持参数显示进制设置功能,支持进制转换功能.\r\n");
-			printf("技术支持:www.openedv.com\r\n");
-			printf("USMART有7个系统命令(必须小写):\r\n");
-			printf("?:      获取帮助信息\r\n");
-			printf("help:   获取帮助信息\r\n");
-			printf("list:   可用的函数列表\r\n\n");
-			printf("id:     可用函数的ID列表\r\n\n");
-			printf("hex:    参数16进制显示,后跟空格+数字即执行进制转换\r\n\n");
-			printf("dec:    参数10进制显示,后跟空格+数字即执行进制转换\r\n\n");
-			printf("runtime:1,开启函数运行计时;0,关闭函数运行计时;\r\n\n");
-			printf("请按照程序编写格式输入函数名及参数并以回车键结束.\r\n");    
+			printf("USMART is a serial debugger and interface developed by AlienTek.\r\n");
+			printf("With the help of it ,you can execute any function\r\n");
+			printf("with any params(DEC HEX NEGATIVE STRING ,and ADDR).\r\n"),
+			printf("The function contains up to 10 params,\r\n"),  
+			printf("and can shou the return value,which is supported in HEX/DEC.\r\n");
+			printf("USMART has 7 system command(MUST in lower case):\r\n");
+			printf("?:      obtain help\r\n");
+			printf("help:   obtain help\r\n");
+			printf("list:   list available functions\r\n\n");
+			printf("id:     list the ids ofavailable functions\r\n\n");
+			printf("hex:    params show in hex\r\n\n");
+			printf("dec:    param show in dec\r\n\n");
+//	  printf("runtime:1,开启函数运行计时;0,关闭函数运行计时;\r\n\n");
+			printf("Please input function name and param in specific format ,and end with enter.\r\n");    
 			printf("--------------------------ALIENTEK------------------------- \r\n");
 #else
 			printf("指令失效\r\n");
@@ -59,13 +58,13 @@ uint8_t usmart_sys_cmd_exe(uint8_t *str)
 			break;
 		case 2://查询指令
 			printf("\r\n");
-			printf("-------------------------函数清单--------------------------- \r\n");
+			printf("-------------------------Function list--------------------------- \r\n");
 			for(i=0;i<usmart_dev.fnum;i++)printf("%s\r\n",usmart_dev.funs[i].name);
 			printf("\r\n");
 			break;	 
 		case 3://查询ID
 			printf("\r\n");
-			printf("-------------------------函数 ID --------------------------- \r\n");
+			printf("-------------------------Function ID --------------------------- \r\n");
 			for(i=0;i<usmart_dev.fnum;i++)
 			{
 				usmart_get_fname((uint8_t*)usmart_dev.funs[i].name,sfname,&pnum,&rval);//得到本地函数名 
@@ -85,7 +84,7 @@ uint8_t usmart_sys_cmd_exe(uint8_t *str)
 				}else if(i!=4)return USMART_PARMERR;//参数错误.
 				else 				   				//参数显示设定功能
 				{
-					printf("16进制参数显示!\r\n");
+					printf("Show in Hex!\r\n");
 					usmart_dev.sptype=SP_TYPE_HEX;  
 				}
 
@@ -104,7 +103,7 @@ uint8_t usmart_sys_cmd_exe(uint8_t *str)
 				}else if(i!=4)return USMART_PARMERR;//参数错误.
 				else 				   				//参数显示设定功能
 				{
-					printf("10进制参数显示!\r\n");
+					printf("Hex:!\r\n");
 					usmart_dev.sptype=SP_TYPE_DEC;  
 				}
 
@@ -143,6 +142,7 @@ uint8_t usmart_sys_cmd_exe(uint8_t *str)
 //其他的:TIM4_IRQHandler和Timer4_Init,需要根据MCU特点自行修改.确保计数器计数频率为:10Khz即可.另外,定时器不要开启自动重装载功能!!
 
 #if USMART_ENTIMX_SCAN==1
+/*
 //复位runtime
 //需要根据所移植到的MCU的定时器参数进行修改
 void usmart_reset_runtime(void)
@@ -161,31 +161,16 @@ uint32_t usmart_get_runtime(void)
 	{
 		usmart_dev.runtime+=0XFFFF;
 	}
-	usmart_dev.runtime+=__HAL_TIM_GET_COUNTER(&TIM4_Handler);
+	usmart_dev.runtime+=__HAL_TIM_GET_COUNTER(&htim16);
 	return usmart_dev.runtime;		//返回计数值
 }  
-//下面这两个函数,非USMART函数,放到这里,仅仅方便移植. 
-//定时器16中断服务程序	 
-void TIM16_IRQHandler(void)
-{ 		    		  			       
-    if(__HAL_TIM_GET_IT_SOURCE(&htim16,TIM_IT_UPDATE)==SET)//溢出中断
-    {
-        usmart_dev.scan();	//执行usmart扫描
-        __HAL_TIM_SET_COUNTER(&htim16,0);;    //清空定时器的CNT
-        __HAL_TIM_SET_AUTORELOAD(&htim16,99);//恢复原来的设置
-    }
-    __HAL_TIM_CLEAR_IT(&htim16, TIM_IT_UPDATE);//清除中断标志位
-} 
-
+*/
 #endif
 ////////////////////////////////////////////////////////////////////////////////////////
 //初始化串口控制器
 //sysclk:系统时钟（Mhz）
 void usmart_init(uint8_t sysclk)
 {
-#if USMART_ENTIMX_SCAN==1
-	Timer4_Init(1000,(uint32_t)sysclk*100-1);//分频,时钟为10K ,100ms中断一次,注意,计数频率必须为10Khz,以和runtime单位(0.1ms)同步.
-#endif
 	usmart_dev.sptype=1;	//十六进制显示参数
 }		
 //从str中获取函数名,id,及参数信息
@@ -249,9 +234,11 @@ void usmart_exe(void)
 		if(i!=pnum-1)printf(",");
 	}
 	printf(")");
+	/*
 #if USMART_ENTIMX_SCAN==1
 	usmart_reset_runtime();	//计时器清零,开始计时
 #endif
+	*/
 	switch(usmart_dev.pnum)
 	{
 		case 0://无参数(void类型)											  
@@ -294,17 +281,17 @@ void usmart_exe(void)
 			break;
 	}
 #if USMART_ENTIMX_SCAN==1
-	usmart_get_runtime();//获取函数执行时间
+	//usmart_get_runtime();//获取函数执行时间
 #endif
 	if(rval==1)//需要返回值.
 	{
 		if(usmart_dev.sptype==SP_TYPE_DEC)printf("=%lu;\r\n",res);//输出执行结果(10进制参数显示)
 		else printf("=0X%X;\r\n",res);//输出执行结果(16进制参数显示)	   
 	}else printf(";\r\n");		//不需要返回值,直接输出结束
-	if(usmart_dev.runtimeflag)	//需要显示函数执行时间
-	{ 
-		printf("Function Run Time:%d.%1dms\r\n",usmart_dev.runtime/10,usmart_dev.runtime%10);//打印函数执行时间 
-	}	
+	//if(usmart_dev.runtimeflag)	//需要显示函数执行时间
+	//{ 
+	//	printf("Function Run Time:%d.%1dms\r\n",usmart_dev.runtime/10,usmart_dev.runtime%10);//打印函数执行时间 
+	//}	
 }
 //usmart扫描函数
 //通过调用该函数,实现usmart的各个控制.该函数需要每隔一定时间被调用一次
@@ -329,17 +316,17 @@ void usmart_scan(void)
 				switch(sta)
 				{
 					case USMART_FUNCERR:
-						printf("函数错误!\r\n");
+						printf("Function error!\r\n");
                       				
 						break;	
 					case USMART_PARMERR:
-						printf("参数错误!\r\n");   			
+						printf("Param error!\r\n");   			
 						break;				
 					case USMART_PARMOVER:
-						printf("参数太多!\r\n");   			
+						printf("Too many params!\r\n");   			
 						break;		
 					case USMART_NOFUNCFIND:
-						printf("未找到匹配的函数!\r\n");   			
+						printf("No function find!\r\n");   			
 						break;		
 				}
 			}

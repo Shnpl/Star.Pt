@@ -128,8 +128,8 @@ void usmart_exe(void);		//执行
 void usmart_scan(void);     //扫描
 uint32_t read_addr(uint32_t addr);	//读取指定地址的值
 void write_addr(uint32_t addr,uint32_t val);//在指定地址写入指定的值
-uint32_t usmart_get_runtime(void);	//获取运行时间
-void usmart_reset_runtime(void);//复位运行时间
+//uint32_t usmart_get_runtime(void);	//获取运行时间
+//void usmart_reset_runtime(void);//复位运行时间
 
 #endif
 

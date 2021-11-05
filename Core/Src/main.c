@@ -26,7 +26,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "usmart.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -91,36 +91,20 @@ int main(void)
   MX_USART1_UART_Init();
   MX_TIM16_Init();
   /* USER CODE BEGIN 2 */
-  
-  HAL_UART_Transmit(&huart1,(uint8_t*)"Star.Pt",8,0xFF);
-  
-  test[0] = 114;
-  uint16_t i = 0;
-  for(i = 1;i<25000;i++)
-  {
-	  test[i]=i;
-  }
+  usmart_dev.init(200);
 
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   
-  HAL_UART_Transmit(&huart1,(uint8_t*)test,1,0xFF);
-  uint32_t *p = test;
   while (1)
   {
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	  
-	  
-	  uint8_t print_text[8] = {0};
-	  sprintf((char*)print_text,"%d",(int)*p);
-	  
-	  HAL_UART_Transmit(&huart1,print_text,8,1000);
-	  p++;
 	  HAL_Delay(500);
+		HAL_GPIO_TogglePin(GPIOB,GPIO_PIN_0);
   }
   /* USER CODE END 3 */
 }

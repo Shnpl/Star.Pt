@@ -21,7 +21,7 @@
 #include "fmc.h"
 
 /* USER CODE BEGIN 0 */
-uint32_t test[250000] __attribute__((at(0xC0000000)));
+uint32_t ext[250000] __attribute__((at(0xC0000000)));
 
 
 
