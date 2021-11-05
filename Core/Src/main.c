@@ -19,6 +19,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "tim.h"
 #include "usart.h"
 #include "gpio.h"
 #include "fmc.h"
@@ -88,6 +89,7 @@ int main(void)
   MX_GPIO_Init();
   MX_FMC_Init();
   MX_USART1_UART_Init();
+  MX_TIM16_Init();
   /* USER CODE BEGIN 2 */
   
   HAL_UART_Transmit(&huart1,(uint8_t*)"Star.Pt",8,0xFF);
