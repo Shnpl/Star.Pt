@@ -61,7 +61,7 @@
 extern DMA_HandleTypeDef hdma_dcmi;
 extern DCMI_HandleTypeDef hdcmi;
 extern TIM_HandleTypeDef htim16;
-extern UART_HandleTypeDef huart1;
+extern UART_HandleTypeDef huart7;
 /* USER CODE BEGIN EV */
 
 /* USER CODE END EV */
@@ -219,33 +219,6 @@ void DMA1_Stream0_IRQHandler(void)
 }
 
 /**
-  * @brief This function handles USART1 global interrupt.
-  */
-void USART1_IRQHandler(void)
-{
-  /* USER CODE BEGIN USART1_IRQn 0 */
-  uint32_t timeout=0;
-  uint32_t maxDelay=0x1FFFF;
-  /* USER CODE END USART1_IRQn 0 */
-  HAL_UART_IRQHandler(&huart1);
-  /* USER CODE BEGIN USART1_IRQn 1 */
-  timeout=0;
-  while (HAL_UART_GetState(&huart1)!=HAL_UART_STATE_READY)//ç­‰å¾�?�å°±ç»�?
-  {
-	timeout++;////è¶…æ�?�¶å¤�?�ç�??
-	if(timeout>maxDelay) break;		
-  }
- 
-  timeout=0;
-  while(HAL_UART_Receive_IT(&huart1,(uint8_t *)aRxBuffer, RXBUFFERSIZE)!=HAL_OK)//ä¸?æ¬¡å¤„ç�?�å®Œæˆä¹�?�åŽï¼Œé�?�æ�?�°å�??å¯ä¸­æ–­å¹¶è®¾ç½®RxXferCountä¸?1
-  {
-	timeout++; //è¶…æ�?�¶å¤�?�ç�??
-	if(timeout>maxDelay) break;	
-  }
-  /* USER CODE END USART1_IRQn 1 */
-}
-
-/**
   * @brief This function handles DCMI global interrupt.
   */
 void DCMI_IRQHandler(void)
@@ -257,6 +230,33 @@ void DCMI_IRQHandler(void)
   /* USER CODE BEGIN DCMI_IRQn 1 */
 
   /* USER CODE END DCMI_IRQn 1 */
+}
+
+/**
+  * @brief This function handles UART7 global interrupt.
+  */
+void UART7_IRQHandler(void)
+{
+  /* USER CODE BEGIN UART7_IRQn 0 */
+	uint32_t timeout=0;
+	uint32_t maxDelay=0x1FFFF;
+	
+  /* USER CODE END UART7_IRQn 0 */
+  HAL_UART_IRQHandler(&huart7);
+  /* USER CODE BEGIN UART7_IRQn 1 */
+  timeout=0;
+  while (HAL_UART_GetState(&huart7)!=HAL_UART_STATE_READY)//莽颅鈥懊ヂ久�??娄氓掳卤莽禄�??
+  {
+    timeout++;////猫露鈥γγ�?聰露氓陇�??聻莽聬芒??
+    if(timeout>maxDelay) break;		
+  }
+  timeout=0;
+  while(HAL_UART_Receive_IT(&huart7,(uint8_t *)aRxBuffer, RXBUFFERSIZE)!=HAL_OK)//盲赂?忙卢隆氓陇鈥灻惷�?聽氓庐艗忙藛聬盲鹿芒?鹿氓聬沤茂录艗茅�??隆聧忙芒?聯掳氓脗??氓聬炉盲赂颅忙鈥�?ヂ孤睹久铰甊xXferCount盲赂?1
+  {
+    timeout++; //猫露鈥γγ�?聰露氓陇�??聻莽聬芒??
+    if(timeout>maxDelay) break;	
+  }
+  /* USER CODE END UART7_IRQn 1 */
 }
 
 /**

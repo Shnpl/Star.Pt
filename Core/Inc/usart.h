@@ -31,7 +31,7 @@ extern "C" {
 #include "stdio.h"
 /* USER CODE END Includes */
 
-extern UART_HandleTypeDef huart1;
+extern UART_HandleTypeDef huart7;
 
 /* USER CODE BEGIN Private defines */
 #define USART_REC_LEN  			200  	//定义�?大接收字节数 200
@@ -45,7 +45,7 @@ extern uint16_t USART_RX_STA;         		//接收状�?�标�?
 extern uint8_t aRxBuffer[RXBUFFERSIZE];//HAL库USART接收Buffer
 /* USER CODE END Private defines */
 
-void MX_USART1_UART_Init(void);
+void MX_UART7_Init(void);
 
 /* USER CODE BEGIN Prototypes */
 

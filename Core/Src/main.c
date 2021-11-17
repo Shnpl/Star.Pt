@@ -95,14 +95,15 @@ int main(void)
   MX_GPIO_Init();
   MX_DMA_Init();
   MX_FMC_Init();
-  MX_USART1_UART_Init();
   MX_TIM16_Init();
   MX_DCMI_Init();
+  MX_TIM1_Init();
+  MX_UART7_Init();
   /* USER CODE BEGIN 2 */
   //I2C->CAMERA->DCMI?
-  CAMERA_Init();
+  //CAMERA_Init();
 
-  usmart_dev.init(200);
+  //usmart_dev.init(200);
   HAL_GPIO_WritePin(GPIOB,GPIO_PIN_0,GPIO_PIN_RESET);
   /* USER CODE END 2 */
 
@@ -114,7 +115,7 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	 HAL_Delay(500);
+	 HAL_Delay(1000);
 	HAL_GPIO_TogglePin(GPIOB,GPIO_PIN_0);
   }
   /* USER CODE END 3 */
