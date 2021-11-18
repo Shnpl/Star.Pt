@@ -33,6 +33,8 @@
 /* USER CODE BEGIN Includes */
 #include "usmart.h"
 #include "camera.h"
+
+#include "user_motor_init.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -99,12 +101,14 @@ int main(void)
   MX_DCMI_Init();
   MX_TIM1_Init();
   MX_UART7_Init();
+  MX_TIM2_Init();
+  MX_TIM17_Init();
   /* USER CODE BEGIN 2 */
   //I2C->CAMERA->DCMI?
   //CAMERA_Init();
-
-  //usmart_dev.init(200);
-  HAL_GPIO_WritePin(GPIOB,GPIO_PIN_0,GPIO_PIN_RESET);
+  Motor_Init();
+  
+  //HAL_GPIO_WritePin(GPIOB,GPIO_PIN_0,GPIO_PIN_RESET);
   /* USER CODE END 2 */
 
   /* Infinite loop */

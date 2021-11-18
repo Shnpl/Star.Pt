@@ -53,7 +53,7 @@
           <CreateLib>0</CreateLib>
           <CreateHexFile>1</CreateHexFile>
           <DebugInformation>1</DebugInformation>
-          <BrowseInformation>1</BrowseInformation>
+          <BrowseInformation>0</BrowseInformation>
           <ListingPath></ListingPath>
           <HexFormatSelection>1</HexFormatSelection>
           <Merge32K>0</Merge32K>
@@ -335,7 +335,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32H750xx</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;../Drivers/STM32H7xx_HAL_Driver/Inc;../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../Drivers/CMSIS/Include;../Core/Inc/USMART;../Core/Inc/CAMERA;../Core/Inc/User_Init;../Core/Inc/General</IncludePath>
+              <IncludePath>../Core/Inc;     ../Drivers/STM32H7xx_HAL_Driver/Inc;     ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy;     ../Drivers/CMSIS/Device/ST/STM32H7xx/Include;     ../Drivers/CMSIS/Include;     ../Core/Inc/USMART;     ../Core/Inc/CAMERA;     ../Core/Inc/User_Init;     ../Core/Inc/General;     ..\Core\Inc\Motor</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -1124,6 +1124,11 @@
               <FileType>1</FileType>
               <FilePath>..\Core\Src\User_Init\user_tim_init.c</FilePath>
             </File>
+            <File>
+              <FileName>user_motor_init.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Core\Src\User_Init\user_motor_init.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1133,6 +1138,21 @@
               <FileName>general.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Core\Src\General\general.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Encoder</GroupName>
+          <Files>
+            <File>
+              <FileName>encoder.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Core\Src\Motor\encoder.c</FilePath>
+            </File>
+            <File>
+              <FileName>PID.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Core\Src\Motor\PID.c</FilePath>
             </File>
           </Files>
         </Group>

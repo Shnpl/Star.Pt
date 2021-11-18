@@ -7,4 +7,5 @@
 #include "tim.h"
 
 Status TIM1_User_Init(void);
+Status TIM2_User_Init(void);
 #endif

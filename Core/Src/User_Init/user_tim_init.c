@@ -7,6 +7,11 @@ Status TIM1_User_Init()
 	HAL_TIM_PWM_Start(&htim1,TIM_CHANNEL_1);
 	HAL_TIM_PWM_Start(&htim1,TIM_CHANNEL_2);
 	
-	TIM1->CCR1 = 30;
-	TIM1->CCR2 = 30;
+	TIM1->CCR1 = 0;
+	TIM1->CCR2 = 0;
+}
+
+Status TIM2_User_Init()
+{
+	HAL_TIM_Encoder_Start(&htim2,TIM_CHANNEL_ALL);
 }

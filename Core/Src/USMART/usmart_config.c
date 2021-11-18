@@ -1,3 +1,5 @@
+#include <stdio.h>
+
 #include "usmart.h"
 #include "usmart_str.h"
 ////////////////////////////用户配置区///////////////////////////////////////////////
@@ -5,6 +7,7 @@
 
 #include "fmc.h"
 #include "command.h"
+#include "general.h"
 uint32_t test_a(uint32_t a,uint32_t b)
 {
 	return a+b;
@@ -49,7 +52,11 @@ struct _m_usmart_nametab usmart_nametab[]=
 	(void*)write_in,"uint8_t write_in(void)",
 	(void*)read_out,"uint8_t read_out(void)",
 	(void*)read_addr_ext,"uint32_t read_addr_ext(uint32_t addr)",
-	(void*)direct_command_0x01,"uint8_t direct_command_0x01(int8_t motor_spd1,int8_t motor_spd2)"
+	(void*)direct_command_0x01,"uint8_t direct_command_0x01(int32_t motor_spd1,int32_t motor_spd2)",
+	(void*)Get_Current_Spd,"Status Get_Current_Spd(uint8_t target)",
+	(void*)Change_M1_Spd,"Status Change_M1_Spd(int8_t target1000)",
+	(void*)Change_M1_PID,"Status Change_M1_PID(int8_t Kp1000,int8_t Ki1000,int8_t Kd1000)",
+	(void*)PrintPID,"Status PrintPID(void)"
 #endif		   
 //	(void*)delay_ms,"void delay_ms(uint16_t nms)",
 // 	(void*)delay_us,"void delay_us(uint32_t nus)",	 

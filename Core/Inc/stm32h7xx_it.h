@@ -60,6 +60,7 @@ void DMA1_Stream0_IRQHandler(void);
 void DCMI_IRQHandler(void);
 void UART7_IRQHandler(void);
 void TIM16_IRQHandler(void);
+void TIM17_IRQHandler(void);
 /* USER CODE BEGIN EFP */
 
 /* USER CODE END EFP */
