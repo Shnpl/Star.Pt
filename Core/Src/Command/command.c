@@ -94,3 +94,15 @@ Status Change_M1_PID(int8_t Kp1000,int8_t Ki1000,int8_t Kd1000)
 	M1.Kd = (float)Kd1000/1000;
 	return 0;
 }
+
+Status Servo_1_Change_Angle(int32_t angle)
+{
+	if(angle < 0 ||angle > 360)
+	{
+		return 1;
+	}
+	int32_t turn_pwm = (int32_t)((float)angle*10/1.8);
+	TIM15->CCR1 = 500 + turn_pwm;
+	return 0;
+}
+	

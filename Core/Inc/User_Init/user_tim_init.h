@@ -8,4 +8,8 @@
 
 Status TIM1_User_Init(void);
 Status TIM2_User_Init(void);
+
+Status TIM15_User_Init(void);
+Status TIM16_User_Init(void);
+Status TIM17_User_Init(void);
 #endif

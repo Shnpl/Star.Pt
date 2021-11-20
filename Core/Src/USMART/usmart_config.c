@@ -56,7 +56,8 @@ struct _m_usmart_nametab usmart_nametab[]=
 	(void*)Get_Current_Spd,"Status Get_Current_Spd(uint8_t target)",
 	(void*)Change_M1_Spd,"Status Change_M1_Spd(int8_t target1000)",
 	(void*)Change_M1_PID,"Status Change_M1_PID(int8_t Kp1000,int8_t Ki1000,int8_t Kd1000)",
-	(void*)PrintPID,"Status PrintPID(void)"
+	(void*)PrintPID,"Status PrintPID(void)",
+	(void*)Servo_1_Change_Angle,"Status Servo_1_Change_Angle(int32_t angle)"
 #endif		   
 //	(void*)delay_ms,"void delay_ms(uint16_t nms)",
 // 	(void*)delay_us,"void delay_us(uint32_t nus)",	 

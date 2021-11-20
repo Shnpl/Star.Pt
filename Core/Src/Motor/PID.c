@@ -30,9 +30,9 @@ Status Delta_PID(Delta_PID_TypeDef* Object)
 		{
 			Object->PWM = 1000;
 		}
-		if(Object->PWM < 0)
+		if(Object->PWM < -1000)
 		{
-			Object->PWM = 0;
+			Object->PWM = -1000;
 		}
 		direct_command_0x01(0,Object->PWM);
 		

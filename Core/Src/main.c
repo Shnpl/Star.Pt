@@ -103,6 +103,7 @@ int main(void)
   MX_UART7_Init();
   MX_TIM2_Init();
   MX_TIM17_Init();
+  MX_TIM15_Init();
   /* USER CODE BEGIN 2 */
   //I2C->CAMERA->DCMI?
   //CAMERA_Init();

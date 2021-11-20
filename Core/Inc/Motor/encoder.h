@@ -8,7 +8,7 @@
 
 Status Get_M1_SPD(void);
 
-extern uint32_t encoder_M1_count_per;
+extern int32_t encoder_M1_count_per;
 extern float M1_speed;
 
 #endif

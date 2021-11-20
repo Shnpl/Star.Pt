@@ -8,4 +8,5 @@ Status Get_Current_Spd(uint8_t target);
 Status Change_M1_Spd(int8_t target1000);
 Status Change_M1_PID(int8_t Kp1000,int8_t Ki1000,int8_t Kd1000);
 Status PrintPID(void);
+Status Servo_1_Change_Angle(int32_t angle);
 #endif
