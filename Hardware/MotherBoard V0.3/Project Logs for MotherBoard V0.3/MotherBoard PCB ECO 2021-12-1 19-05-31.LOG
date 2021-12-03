@@ -1,0 +1,23 @@
+Change component parameters: Designator = "P0" ("P0"); Footprint = "PCBComponent_1"; UniqueID = "\OUYBVJRA" ("\OUYBVJRA")
+Change component parameters (AddParameter): Name = "LatestRevisionDate"; Value = "17-Jul-2002"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "LatestRevisionNote"; Value = "Re-released for DXP Platform."; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Publisher"; Value = "Altium Limited"; VariantName = "[No Variations]"
+Added Component: Designator=P14(MPIN-6-2.54-1.0)
+Add component (AddParameter): Name = "LatestRevisionDate"; Value = "17-Jul-2002"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "LatestRevisionNote"; Value = "Re-released for DXP Platform."; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Publisher"; Value = "Altium Limited"; VariantName = "[No Variations]"
+Added Component: Designator=P15(MPIN-6-2.54-1.0)
+Add component (AddParameter): Name = "LatestRevisionDate"; Value = "17-Jul-2002"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "LatestRevisionNote"; Value = "Re-released for DXP Platform."; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Publisher"; Value = "Altium Limited"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=+5 Pin=P14-2
+Added Pin To Net: NetName=GND Pin=P14-5
+Added Pin To Net: NetName=F103_UART5_RX Pin=P0-41
+Added Pin To Net: NetName=F103_UART5_RX Pin=P14-4
+Added Net: Name=F103_UART5_RX
+Added Pin To Net: NetName=F103_UART5_TX Pin=P0-42
+Added Pin To Net: NetName=F103_UART5_TX Pin=P14-3
+Added Net: Name=F103_UART5_TX
+Added Member To Class: ClassName=MotherBoard Member=Component P14 MHDR1X6
+Added Member To Class: ClassName=MotherBoard Member=Component P15 MHDR1X6
+Added Room: Name=MotherBoard
