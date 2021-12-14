@@ -1,4 +1,4 @@
-#include "tim_init.h"
+#include "tim_drv.h"
 /*
 @ TIM1 Init 
 @ 4 channel PWM
@@ -16,4 +16,25 @@ void USER_TIM1_Init(void)
 	TIM1->CCR2 = 0;
 	TIM1->CCR3 = 0;
 	TIM1->CCR4 = 0;
+}
+/*
+@ TIM6 Init
+@ 
+@ clock 72Mhz produce 10KHz irq?
+@ period 100
+*/
+void USER_TIM6_Init(void)
+{
+	HAL_TIM_Base_Start_IT(&htim6);
+}
+void USER_TIM6_IRQHandler(void)
+{
+	
+	if(UART4_RX_Ready == 1)
+	{
+		HAL_GPIO_TogglePin(GPIOC,GPIO_PIN_13);
+		
+		//Reset flags and num;
+		UART4_ResetFlags();
+	}
 }

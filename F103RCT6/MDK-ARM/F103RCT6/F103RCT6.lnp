@@ -21,9 +21,11 @@
 "f103rct6\stm32f1xx_hal_exti.o"
 "f103rct6\stm32f1xx_hal_uart.o"
 "f103rct6\system_stm32f1xx.o"
-"f103rct6\tim_init.o"
-"f103rct6\uart_init.o"
+"f103rct6\tim_drv.o"
+"f103rct6\uart_drv.o"
+"f103rct6\motor_drv.o"
+"f103rct6\irq.o"
 --strict --scatter "F103RCT6\F103RCT6.sct"
---summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--summary_stderr --info summarysizes --map --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
 --list "F103RCT6.map" -o F103RCT6\F103RCT6.axf

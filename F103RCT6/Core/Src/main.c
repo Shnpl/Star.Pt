@@ -25,7 +25,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "uart_init.h"
+#include "uart_drv.h"
 #include "string.h"
 /* USER CODE END Includes */
 
@@ -96,30 +96,19 @@ int main(void)
   MX_TIM8_Init();
   MX_UART4_Init();
   MX_UART5_Init();
+  MX_TIM6_Init();
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-	uint8_t temp[32];
   while (1)
   {
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-		HAL_UART_Receive(&huart4, temp,6,0xFFF);
 		HAL_Delay(500);
-		if(strcmp((char*)temp,"000000")==0)
-		{
-			HAL_GPIO_TogglePin(GPIOC,GPIO_PIN_13);
-			TIM1->CCR1 = 300-TIM1->CCR1;
-		}
-		else if(strcmp((char*)temp,"000001")==0)
-		{
-			HAL_GPIO_TogglePin(GPIOC,GPIO_PIN_13);
-			TIM1->CCR1 = 300-TIM1->CCR1;
-		}
   }
   /* USER CODE END 3 */
 }
