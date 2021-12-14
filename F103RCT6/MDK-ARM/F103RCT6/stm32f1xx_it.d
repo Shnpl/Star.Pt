@@ -29,3 +29,5 @@ f103rct6\stm32f1xx_it.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h
 f103rct6\stm32f1xx_it.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h
 f103rct6\stm32f1xx_it.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h
 f103rct6\stm32f1xx_it.o: ../Core/Inc/stm32f1xx_it.h
+f103rct6\stm32f1xx_it.o: ..\UserInits\uart_init.h
+f103rct6\stm32f1xx_it.o: ../Core/Inc/usart.h

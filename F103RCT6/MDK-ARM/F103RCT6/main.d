@@ -31,3 +31,5 @@ f103rct6\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h
 f103rct6\main.o: ../Core/Inc/tim.h
 f103rct6\main.o: ../Core/Inc/usart.h
 f103rct6\main.o: ../Core/Inc/gpio.h
+f103rct6\main.o: ..\UserInits\uart_init.h
+f103rct6\main.o: D:\Programs\Keil5\ARM\ARMCC\Bin\..\include\string.h

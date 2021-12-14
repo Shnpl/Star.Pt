@@ -12,4 +12,8 @@ void USER_TIM1_Init(void)
 	HAL_TIM_PWM_Start(&htim1,TIM_CHANNEL_2);
 	HAL_TIM_PWM_Start(&htim1,TIM_CHANNEL_3);
 	HAL_TIM_PWM_Start(&htim1,TIM_CHANNEL_4);
+	TIM1->CCR1 = 0;
+	TIM1->CCR2 = 0;
+	TIM1->CCR3 = 0;
+	TIM1->CCR4 = 0;
 }
