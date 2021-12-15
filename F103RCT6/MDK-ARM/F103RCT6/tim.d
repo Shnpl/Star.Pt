@@ -32,3 +32,4 @@ f103rct6\tim.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h
 f103rct6\tim.o: ..\BoardDrivers\tim_drv.h
 f103rct6\tim.o: ..\BoardDrivers\uart_drv.h
 f103rct6\tim.o: ../Core/Inc/usart.h
+f103rct6\tim.o: ..\Others\command.h

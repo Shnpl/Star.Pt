@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "tim_drv.h"
 /*
 @ TIM1 Init 
@@ -29,11 +30,17 @@ void USER_TIM6_Init(void)
 }
 void USER_TIM6_IRQHandler(void)
 {
-	
+	CommandTypeDef cmd;
 	if(UART4_RX_Ready == 1)
 	{
 		HAL_GPIO_TogglePin(GPIOC,GPIO_PIN_13);
 		
+		PreProcessCommand(UART4_RX_Buffer,0,&cmd);
+		HAL_UART_Transmit(&huart5,UART4_RX_Buffer,6,0xFFF);
+		ProcessCommand(&cmd);
+//		char temp[8];
+//		sprintf(temp,"\t%d",cmd.motor_1_speed);
+//		HAL_UART_Transmit(&huart5,temp,5,0xFFF);
 		//Reset flags and num;
 		UART4_ResetFlags();
 	}

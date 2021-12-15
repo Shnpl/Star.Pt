@@ -33,3 +33,4 @@ f103rct6\stm32f1xx_it.o: ..\BoardDrivers\uart_drv.h
 f103rct6\stm32f1xx_it.o: ../Core/Inc/usart.h
 f103rct6\stm32f1xx_it.o: ..\BoardDrivers\tim_drv.h
 f103rct6\stm32f1xx_it.o: ../Core/Inc/tim.h
+f103rct6\stm32f1xx_it.o: ..\Others\command.h

@@ -1,4 +1,5 @@
 f103rct6\tim_drv.o: ..\BoardDrivers\tim_drv.c
+f103rct6\tim_drv.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 f103rct6\tim_drv.o: ..\BoardDrivers\tim_drv.h
 f103rct6\tim_drv.o: ../Core/Inc/main.h
 f103rct6\tim_drv.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h
@@ -32,3 +33,4 @@ f103rct6\tim_drv.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h
 f103rct6\tim_drv.o: ../Core/Inc/tim.h
 f103rct6\tim_drv.o: ..\BoardDrivers\uart_drv.h
 f103rct6\tim_drv.o: ../Core/Inc/usart.h
+f103rct6\tim_drv.o: ..\Others\command.h

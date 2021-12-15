@@ -3,7 +3,7 @@
 #include "main.h"
 #include "usart.h"
 
-#define UART4_RXBUFFERSIZE 64
+#define UART4_RXBUFFERSIZE 128
 
 extern uint8_t UART4_RX_Buffer[UART4_RXBUFFERSIZE];
 extern uint8_t UART4_RX_Ready;

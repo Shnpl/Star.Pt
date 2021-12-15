@@ -25,6 +25,7 @@
 "f103rct6\uart_drv.o"
 "f103rct6\motor_drv.o"
 "f103rct6\irq.o"
+"f103rct6\command.o"
 --strict --scatter "F103RCT6\F103RCT6.sct"
 --summary_stderr --info summarysizes --map --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
