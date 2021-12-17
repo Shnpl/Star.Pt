@@ -38,6 +38,29 @@ uint8_t PreProcessCommand(uint8_t *src, int32_t length, CommandTypeDef *cmd)
 			}
 			break;
 		}
+		case 1:
+		{
+			cmd->motor_1_speed = MotorSpeedGet_HextoDec(&src[5]);
+			if(cmd->motor_1_speed > 1000)
+			{
+				cmd->motor_1_speed = 1000;
+			}
+			else if(cmd->motor_1_speed < -1000)
+			{
+				cmd->motor_1_speed = -1000;
+			}
+			
+			cmd->motor_2_speed = MotorSpeedGet_HextoDec(&src[1]);
+			if(cmd->motor_2_speed > 1000)
+			{
+				cmd->motor_2_speed = 1000;
+			}
+			else if(cmd->motor_2_speed < -1000)
+			{
+				cmd->motor_2_speed = -1000;
+			}
+			break;
+		}
 		default:
 		{
 			break;
@@ -61,6 +84,32 @@ uint8_t ProcessCommand(CommandTypeDef *cmd)
 			{
 				HAL_GPIO_WritePin(MOTOR_DIR_1_GPIO_Port,MOTOR_DIR_1_Pin,GPIO_PIN_SET);
 				TIM1->CCR1 = 0 - cmd->motor_1_speed;
+			}
+			
+		}
+		case 1:
+		{
+			//adjust motor 1 speed
+			if(cmd->motor_1_speed > 0)
+			{
+				HAL_GPIO_WritePin(MOTOR_DIR_1_GPIO_Port,MOTOR_DIR_1_Pin,GPIO_PIN_RESET);
+				TIM1->CCR1 = cmd->motor_1_speed;
+			}
+			else
+			{
+				HAL_GPIO_WritePin(MOTOR_DIR_1_GPIO_Port,MOTOR_DIR_1_Pin,GPIO_PIN_SET);
+				TIM1->CCR1 = 0 - cmd->motor_1_speed;
+			}
+			//adjust motor 2 speed
+			if(cmd->motor_2_speed > 0)
+			{
+				HAL_GPIO_WritePin(MOTOR_DIR_2_GPIO_Port,MOTOR_DIR_2_Pin,GPIO_PIN_RESET);
+				TIM1->CCR2 = cmd->motor_2_speed;
+			}
+			else
+			{
+				HAL_GPIO_WritePin(MOTOR_DIR_2_GPIO_Port,MOTOR_DIR_2_Pin,GPIO_PIN_SET);
+				TIM1->CCR2 = 0 - cmd->motor_2_speed;
 			}
 			
 		}

@@ -1,27 +1,68 @@
-# -*- coding:utf-8 -*-
-
+from urllib.request import urlopen
+from tkinter import *
+from PIL import ImageTk, Image
 import cv2
-import numpy as np
-from urllib import request
+import socket
+import sys
 
-url = "http://192.168.43.86:8080/?action=snapshot"
 
-def downloadImg():
-    global url
-    with request.urlopen(url) as f:
-        data = f.read()
-        img1 = np.frombuffer(data, np.uint8)
-        #print("img1 shape ", img1.shape) # (83653,)
-        img_cv = cv2.imdecode(img1, cv2.IMREAD_ANYCOLOR)
-        return img_cv
+ 
+# function for video streaming
+def video_stream():
+    _, frame = cap.read()
+    cv2image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGBA)
+    img = Image.fromarray(cv2image)
+    imgtk = ImageTk.PhotoImage(image=img)
+    label_video.imgtk = imgtk
+    label_video.configure(image=imgtk)
+    label_video.after(1, video_stream) 
 
-while True:
-    # image = downloadImg() 
-    image = downloadImg() #cv2.imread('1.jpg') # 根据路径读取一张图片
-    #cv2.imshow("frame", image)
-    #dst = cv2.cvtColor(image, cv2.COLOR_BGR2HSV) # BGR转HSV
-    cv2.imshow('output', image)
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
+def select_mode(x) :
+    global mode
+    mode = x
+
+if __name__ == "__main__":
     
-cv2.destroyAllWindows()
+    
+    mode = 0
+    root = Tk()
+    root.geometry("1440x900")
+    root.title("Star.Pt")
+    # Create a label in the frame
+    label_video = Label(root)
+    label_video.pack(side='top')
+
+    command_entry = Entry(root)
+    command_entry.pack(side = 'left')
+
+    mode_select_menu = ['单电机调试模式','双电机调试模式']
+    mode_select_var = StringVar()
+    mode_select_var.set(mode_select_menu[0])
+    mode_select = OptionMenu(root, mode_select_var,*mode_select_menu)
+    mode_select.pack(side = 'right')    
+
+    btn_send = Button(root)
+    btn_send['text'] = 'send'
+    btn_send.pack(side='left')
+
+    def btn_send_event(event):
+        s = socket.socket() 
+        # 获取本地主机名
+        host ='192.168.3.170'
+        port = 11451
+        s.connect((host, port))
+        #print(command_entry.get())
+
+        if mode_select_var.get() == '单电机调试模式' :
+            msg = 'SS0'+command_entry.get()+'EE'
+        elif mode_select_var.get() == '双电机调试模式':
+            msg = 'SS1'+command_entry.get()+'EE'
+        s.send(msg.encode('utf-8'))
+        s.close()
+
+    btn_send.bind('<ButtonRelease-1>', btn_send_event)
+    # Capture from camera
+    cap = cv2.VideoCapture('http://192.168.3.170:8080/?action=stream')
+    video_stream()
+
+    root.mainloop()

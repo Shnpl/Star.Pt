@@ -60,6 +60,8 @@ void Error_Handler(void);
 /* Private defines -----------------------------------------------------------*/
 #define MOTOR_DIR_1_Pin GPIO_PIN_10
 #define MOTOR_DIR_1_GPIO_Port GPIOB
+#define MOTOR_DIR_2_Pin GPIO_PIN_11
+#define MOTOR_DIR_2_GPIO_Port GPIOB
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */

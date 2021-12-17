@@ -3,7 +3,7 @@
 <title>Static Call Graph - [F103RCT6\F103RCT6.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image F103RCT6\F103RCT6.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060422: Last Updated: Wed Dec 15 20:57:15 2021
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060422: Last Updated: Fri Dec 17 00:36:52 2021
 <BR><P>
 <H3>Maximum Stack Usage =        152 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -877,7 +877,7 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f103xe.o(RESET)
 </UL>
-<P><STRONG><a name="[95]"></a>MX_GPIO_Init</STRONG> (Thumb, 158 bytes, Stack size 48 bytes, gpio.o(i.MX_GPIO_Init))
+<P><STRONG><a name="[95]"></a>MX_GPIO_Init</STRONG> (Thumb, 160 bytes, Stack size 48 bytes, gpio.o(i.MX_GPIO_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = MX_GPIO_Init &rArr; HAL_GPIO_Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
@@ -1014,16 +1014,16 @@ Global Symbols
 <P><STRONG><a name="[b]"></a>PendSV_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, stm32f1xx_it.o(i.PendSV_Handler))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f103xe.o(RESET)
 </UL>
-<P><STRONG><a name="[a9]"></a>PreProcessCommand</STRONG> (Thumb, 40 bytes, Stack size 8 bytes, command.o(i.PreProcessCommand))
-<BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = PreProcessCommand &rArr; MotorSpeedGet_HextoDec
+<P><STRONG><a name="[a9]"></a>PreProcessCommand</STRONG> (Thumb, 100 bytes, Stack size 20 bytes, command.o(i.PreProcessCommand))
+<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = PreProcessCommand &rArr; MotorSpeedGet_HextoDec
 </UL>
 <BR>[Calls]<UL><LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MotorSpeedGet_HextoDec
 </UL>
 <BR>[Called By]<UL><LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USER_TIM6_IRQHandler
 </UL>
 
-<P><STRONG><a name="[aa]"></a>ProcessCommand</STRONG> (Thumb, 48 bytes, Stack size 16 bytes, command.o(i.ProcessCommand))
-<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = ProcessCommand
+<P><STRONG><a name="[aa]"></a>ProcessCommand</STRONG> (Thumb, 142 bytes, Stack size 24 bytes, command.o(i.ProcessCommand))
+<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = ProcessCommand
 </UL>
 <BR>[Calls]<UL><LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
 </UL>
