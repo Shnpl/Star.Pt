@@ -47,7 +47,12 @@ class Command:
             fmt_M2 = '{:+X}'.format(self.__speed_M2).zfill(4)
             fmt_M3 = '{:+X}'.format(self.__speed_M3).zfill(4)
             fmt_M4 = '{:+X}'.format(self.__speed_M4).zfill(4)
-            send_msg ='SS{:1d}{}{}{}{}EE'.format(self.__mode,fmt_M1,fmt_M2,fmt_M3,fmt_M4)
+
+            fmt_S1 = '{:+X}'.format(self.__angle_S1).zfill(4)
+            fmt_S2 = '{:+X}'.format(self.__angle_S2).zfill(4)
+            fmt_S3 = '{:+X}'.format(self.__angle_S3).zfill(4)
+            fmt_S4 = '{:+X}'.format(self.__angle_S4).zfill(4)
+            send_msg ='SS{:1d}{}{}{}{}{}{}{}{}EE'.format(self.__mode,fmt_M1,fmt_M2,fmt_M3,fmt_M4,fmt_S1,fmt_S2,fmt_S3,fmt_S4)
 
         if self.__mode == 1:
             fmt_M1 = '{:+X}'.format(self.__speed_M1).zfill(4)

@@ -4,23 +4,23 @@ from tkinter.ttk import *
 from socket_mf import *
 from command import *
 def toward(command):
-        command.set_speed_M1(50)
-        command.set_speed_M2(50)
+        command.set_speed_M1(200)
+        command.set_speed_M2(200)
         command.send_cmd()
     
 def left(command):
-    command.set_speed_M1(-50)
-    command.set_speed_M2(50)
+    command.set_speed_M1(-200)
+    command.set_speed_M2(200)
     command.send_cmd()
 
 def right(command):
-    command.set_speed_M1(50)
-    command.set_speed_M2(-50)
+    command.set_speed_M1(200)
+    command.set_speed_M2(-200)
     command.send_cmd()
 
 def back(command):
-    command.set_speed_M1(-50)
-    command.set_speed_M2(-50)
+    command.set_speed_M1(-200)
+    command.set_speed_M2(-200)
     command.send_cmd()
 
 def stop(command):

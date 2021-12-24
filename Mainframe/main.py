@@ -9,10 +9,10 @@ from frame_tank import *
 
 
 def root_timer(command):
-        if command.mainframe_debugging == True:
-                video_img = PhotoImage(file = 'NOSIGNAL.png')
-        else:
-                video_img = GetVideoStream('http://192.168.43.86:8080/?action=stream')
+        #if command.mainframe_debugging == True:
+        video_img = PhotoImage(file = 'NOSIGNAL.png')
+        #else:
+        #        video_img = GetVideoStream('http://192.168.43.86:8080/?action=stream')
         label_video.imgtk = video_img
         label_video.configure(image=video_img)
         
@@ -21,7 +21,7 @@ def root_timer(command):
 if __name__ == "__main__":
 
     cmd = Command()
-    cmd.set_mainframe_debug_mode(True)
+    cmd.set_mainframe_debug_mode(False)
     cmd.set_mode(1)
 
     root = Tk()

@@ -45,3 +45,23 @@ void USER_TIM6_IRQHandler(void)
 		UART4_ResetFlags();
 	}
 }
+
+/*
+@ TIM8 Init 
+@ 4 channel PWM
+@ clock 72Mhz PWM 50hz
+@ period 20000
+
+*/
+void USER_TIM8_Init(void)
+{
+	TIM8->BDTR |= 1<<15; //MOE bit set to 1 ,for Advanced TIM
+	HAL_TIM_PWM_Start(&htim8,TIM_CHANNEL_1);
+	HAL_TIM_PWM_Start(&htim8,TIM_CHANNEL_2);
+	HAL_TIM_PWM_Start(&htim8,TIM_CHANNEL_3);
+	HAL_TIM_PWM_Start(&htim8,TIM_CHANNEL_4);
+	TIM8->CCR1 = 500;
+	TIM8->CCR2 = 500;
+	TIM8->CCR3 = 500;
+	TIM8->CCR4 = 500;
+}

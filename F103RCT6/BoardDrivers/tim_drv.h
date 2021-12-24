@@ -8,4 +8,7 @@ void USER_TIM1_Init(void);
 void USER_TIM6_Init(void);
 
 void USER_TIM6_IRQHandler(void);
+
+void USER_TIM8_Init(void);
+
 #endif

@@ -17,9 +17,9 @@ def GetVideoStream(url):
 
 def socket_send(msg):
     s = socket.socket() 
-    #host ='192.168.3.170'
-    host = '192.168.43.86'
-    port = 11451
+    host ='192.168.3.233'
+    #host = '192.168.43.86'
+    port = 1919
     s.connect((host, port))
     s.send(msg.encode('utf-8'))
     s.close()
