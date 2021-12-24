@@ -1,17 +1,25 @@
 from tkinter import *
 from tkinter.ttk import *    
+import re
 
 from socket_mf import *
 from command import *
 
 def direct_send(command,M1_spd,M2_spd,M3_spd,M4_spd):
     command.set_mode(0)
-    command.set_speed_M1(M1_spd)
-    command.set_speed_M2(M2_spd)
-    command.set_speed_M3(M3_spd)
-    command.set_speed_M4(M4_spd)
-
-    command.send_cmd()
+    pattern = re.compile(r'(\-)?[0-9]{1,3}$')
+    if re.match(pattern, M1_spd) and\
+       re.match(pattern, M2_spd) and\
+       re.match(pattern, M3_spd) and\
+       re.match(pattern, M4_spd) :     
+        
+        command.set_speed_M1(int(M1_spd))
+        command.set_speed_M2(int(M2_spd))
+        command.set_speed_M3(int(M3_spd))
+        command.set_speed_M4(int(M4_spd))
+        command.send_cmd()
+    else:
+        print('Input Error')
 
 
 
@@ -57,8 +65,8 @@ def InitFrameDirect(master,command):
     entry_M4_0.place(x =75,y = 90)
 
     
-    button_direct_mode_change = Button(frame_direct_command,text = '发送指令')
-    button_direct_mode_change.bind('<ButtonRelease-1>',lambda event: direct_send(command,int(str(M1_spd.get())),int(str(M2_spd.get())),int(str(M3_spd.get())),int(str(M4_spd.get()))))
+    button_direct_mode_change = Button(frame_direct_command,text = '发送指令')        
+    button_direct_mode_change.bind('<ButtonRelease-1>',lambda event: direct_send(command,str(M1_spd.get()),str(M2_spd.get()),str(M3_spd.get()),str(M4_spd.get())))
     button_direct_mode_change.place(x = 1100,y =0)
 
     

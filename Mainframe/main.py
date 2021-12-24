@@ -8,16 +8,20 @@ from frame_tank import *
 
 
 
-def root_timer():
-        video_img = GetVideoStream('http://192.168.43.86:8080/?action=stream')
+def root_timer(command):
+        if command.mainframe_debugging == True:
+                video_img = PhotoImage(file = 'NOSIGNAL.png')
+        else:
+                video_img = GetVideoStream('http://192.168.43.86:8080/?action=stream')
         label_video.imgtk = video_img
         label_video.configure(image=video_img)
         
-        root.after(1,root_timer)
+        root.after(10,lambda :root_timer(command))
 
 if __name__ == "__main__":
 
     cmd = Command()
+    cmd.set_mainframe_debug_mode(True)
     cmd.set_mode(1)
 
     root = Tk()
@@ -43,7 +47,7 @@ if __name__ == "__main__":
     main_notebook.pack()
 
     
-    frame_tank.after(1,root_timer)
+    root_timer(cmd)
     
     root.mainloop()
 

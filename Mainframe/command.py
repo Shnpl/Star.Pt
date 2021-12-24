@@ -12,10 +12,16 @@ class Command:
         self.__angle_S2 = 0
         self.__angle_S3 = 0
         self.__angle_S4 = 0
+        self.mainframe_debugging = False
 
     def set_mode(self,mode):
         self.__mode = mode
         print (self.__mode)
+    def set_mainframe_debug_mode(self,mode):
+        self.mainframe_debugging = mode
+        print("Mainframe Debugging:",self.mainframe_debugging)
+    def get_mainframe_debug_mode(self):
+        return self.mainframe_debugging
 
     def set_speed_M1(self, speed):
         self.__speed_M1 = speed
@@ -47,8 +53,8 @@ class Command:
             fmt_M1 = '{:+X}'.format(self.__speed_M1).zfill(4)
             fmt_M2 = '{:+X}'.format(self.__speed_M2).zfill(4)
             send_msg ='SS{:1d}{}{}EE'.format(self.__mode,fmt_M1,fmt_M2)
-
-        socket_send(send_msg)
+        if self.mainframe_debugging == False:
+            socket_send(send_msg)
         print(send_msg)
 
     
